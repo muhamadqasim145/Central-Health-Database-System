@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #12233a;
+  --muted: #55657a;
+  --line: #d9e2ee;
+  --accent: #1f4fd8;
+  --accent2: #6aa6ff;
+  --bg: #eef4ff;
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* lab users get the teal theme (set from PortalShell / login page) */
+body[data-role="LAB"] {
+  --accent: #0b8f7f;
+  --accent2: #5fd6c3;
+  --bg: #e9faf6;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  transition: background 0.8s;
+  min-height: 100vh;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  background: var(--accent2);
+  animation: float 14s ease-in-out infinite;
+}
+@keyframes float { 50% { transform: translate(40px, -50px) scale(1.15); } }
+
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid #fff;
+  border-radius: 18px;
+}
+.fade-up { animation: fadeUp 0.5s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.shake { animation: shake 0.4s; }
+@keyframes shake { 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+
+.spinner {
+  display: inline-block; width: 18px; height: 18px; border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.4); border-top-color: #fff;
+  animation: spin 0.7s linear infinite; vertical-align: middle;
+}
+.spinner.dark { border-color: rgba(0, 0, 0, 0.15); border-top-color: var(--accent); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.ecg-run { stroke-dasharray: 0.3 1; animation: run 2.2s linear infinite; }
+@keyframes run { from { stroke-dashoffset: 0.3; } to { stroke-dashoffset: -1; } }
+
+.shine::after {
+  content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  animation: shine 3.5s infinite;
+}
+@keyframes shine { to { left: 130%; } }
+
+.grow { transform-origin: bottom; animation: grow 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) backwards; }
+@keyframes grow { from { transform: scaleY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
 }

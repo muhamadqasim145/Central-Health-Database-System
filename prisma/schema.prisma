@@ -1,0 +1,59 @@
+// Reference only: the models the API code expects. Your own schema may differ,
+// but these names and fields are used in the API files.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int     @id @default(autoincrement())
+  username     String  @unique        // stored in lowercase
+  passwordHash String                 // bcryptjs hash
+  role         String                 // "LAB" | "DOCTOR" | "PATIENT"
+  name         String
+  patientId    Int?                   // only for PATIENT users
+}
+
+model Patient {
+  id            Int              @id @default(autoincrement())
+  nameEncrypted String           // made with encryptText()
+  requests      LabTestRequest[]
+  reports       LabReport[]
+}
+
+model LabTestRequest {
+  id          Int        @id @default(autoincrement())
+  patientId   Int
+  testName    String
+  requestedBy String
+  status      String     @default("PENDING") // "PENDING" | "COMPLETED"
+  createdAt   DateTime   @default(now())
+  patient     Patient    @relation(fields: [patientId], references: [id])
+  report      LabReport?
+}
+
+model LabReport {
+  id            Int            @id @default(autoincrement())
+  requestId     Int            @unique
+  patientId     Int
+  fileName      String
+  fileType      String
+  fileEncrypted Bytes          // the encrypted photo or PDF
+  noteEncrypted String?        // encrypted summary text
+  uploadedBy    Int
+  createdAt     DateTime       @default(now())
+  request       LabTestRequest @relation(fields: [requestId], references: [id])
+  patient       Patient        @relation(fields: [patientId], references: [id])
+}
+
+model AccessLog {
+  id          Int      @id @default(autoincrement())
+  userName    String
+  reportTitle String
+  action      String
+  createdAt   DateTime @default(now())
+}
