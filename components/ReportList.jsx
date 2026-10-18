@@ -108,7 +108,8 @@ export default function ReportList() {
 
       {detail && (
         <div className="glass fade-up mt-4 p-5">
-          <b>
+          <b className="inline-flex items-center gap-1.5">
+            <Icon name="file-text" size={16} className="text-[var(--accent)]" />
             {detail.testName} · {detail.patientName}
           </b>
           <div className="mt-3">
