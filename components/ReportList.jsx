@@ -83,14 +83,16 @@ export default function ReportList() {
             <div className="flex gap-1.5">
               <button
                 onClick={() => view(r)}
-                className="rounded-[10px] bg-[var(--accent)] px-3.5 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                className="inline-flex items-center gap-1.5 rounded-[10px] bg-[var(--accent)] px-3.5 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5"
               >
+                <Icon name={openId === r.id ? "eye-off" : "eye"} size={15} />
                 {openId === r.id ? "Close" : "View"}
               </button>
               <button
                 onClick={() => download(r)}
-                className="rounded-[10px] border-[1.5px] border-[var(--accent)] bg-white px-3.5 py-2 text-sm font-semibold text-[var(--accent)]"
+                className="inline-flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-[var(--accent)] bg-white px-3.5 py-2 text-sm font-semibold text-[var(--accent)]"
               >
+                <Icon name="download" size={15} />
                 Download
               </button>
             </div>
