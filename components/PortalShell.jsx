@@ -75,12 +75,13 @@ export default function PortalShell({ allow, chip, icon, nav = [], wide = false,
             <Link
               key={n.href}
               href={n.href}
-              className={`rounded-full border-[1.5px] px-4 py-2 text-sm font-semibold transition ${
+              className={`inline-flex items-center gap-2 rounded-full border-[1.5px] px-4 py-2 text-sm font-semibold transition ${
                 path === n.href
                   ? "border-[var(--accent)] bg-[var(--accent)] text-white"
                   : "border-[var(--line)] bg-white text-[var(--muted)]"
               }`}
             >
+              <Icon name={n.icon} size={16} />
               {n.label}
             </Link>
           ))}
