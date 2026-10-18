@@ -201,7 +201,10 @@ export default function Home() {
 
           {mode === "signup" && (
             <label htmlFor="role" className="mb-3 block text-xs font-semibold text-[var(--muted)]">
-              Staff role
+              <span className="inline-flex items-center gap-1.5">
+                <Icon name={form.role === "DOCTOR" ? "stethoscope" : "flask"} size={14} />
+                Staff role
+              </span>
               <select
                 id="role"
                 name="role"
