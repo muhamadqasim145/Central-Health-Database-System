@@ -224,7 +224,10 @@ export default function Home() {
           )}
 
           <label htmlFor="username" className="mb-3 block text-xs font-semibold text-[var(--muted)]">
-            Username
+            <span className="inline-flex items-center gap-1.5">
+              <Icon name="user" size={14} />
+              Username
+            </span>
             <input
               id="username"
               name="username"
