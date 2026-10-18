@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { getAccessLog } from "@/services/labService";
+import Icon from "@/components/Icon";
 
 export default function AccessLogPage() {
   const [list, setList] = useState(null);
@@ -13,7 +14,10 @@ export default function AccessLogPage() {
 
   return (
     <>
-      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Who accessed reports</p>
+      <p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">
+        <Icon name="scroll-text" size={16} />
+        Who accessed reports
+      </p>
       <div className="glass px-4 py-1">
         {list.length === 0 && <p className="py-4 text-[var(--muted)]">No activity yet.</p>}
         {list.map((l, i) => (
