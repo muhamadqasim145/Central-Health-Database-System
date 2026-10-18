@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { decryptText } from "@/lib/encryption";
+import { formatPatientName } from "@/lib/patientName";
 
 // GET /api/lab/requests   (LAB only) - test requests waiting for a report
 // Returns: [{ id, patientName, testName, requestedBy, createdAt }]
@@ -17,7 +17,7 @@ export async function GET(req) {
   return Response.json(
     list.map((r) => ({
       id: r.id,
-      patientName: decryptText(r.patient.nameEncrypted), // lab is allowed to see the name
+      patientName: formatPatientName(r.patient),
       testName: r.testName,
       requestedBy: r.requestedBy,
       createdAt: r.createdAt,
