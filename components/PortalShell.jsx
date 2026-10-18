@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { getSession, clearSession } from "@/lib/session";
+import Icon from "@/components/Icon";
 
 // Wraps a portal page: checks the role, shows the welcome header, navigation and log out.
 // allow = roles that may open this portal, e.g. ["LAB"]
-export default function PortalShell({ allow, chip, nav = [], children }) {
+export default function PortalShell({ allow, chip, icon, nav = [], wide = false, brand = false, children }) {
   const router = useRouter();
   const path = usePathname();
   const [session, setSession] = useState(null);
