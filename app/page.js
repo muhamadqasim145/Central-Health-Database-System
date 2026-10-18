@@ -154,7 +154,10 @@ export default function Home() {
             aria-pressed={mode === "signup"}
             className={`flex-1 rounded-lg px-3 py-2 ${mode === "signup" ? "bg-[var(--accent)] text-white" : "text-[var(--muted)]"}`}
           >
-            Sign up
+            <span className="inline-flex items-center justify-center gap-1.5">
+              <Icon name="user-round" size={16} />
+              Sign up
+            </span>
           </button>
           <button
             type="button"
@@ -163,14 +166,20 @@ export default function Home() {
             aria-pressed={mode === "signin"}
             className={`flex-1 rounded-lg px-3 py-2 ${mode === "signin" ? "bg-[var(--accent)] text-white" : "text-[var(--muted)]"}`}
           >
-            Sign in
+            <span className="inline-flex items-center justify-center gap-1.5">
+              <Icon name="lock" size={16} />
+              Sign in
+            </span>
           </button>
         </div>
 
         <form onSubmit={handleSubmit} noValidate>
           {mode === "signup" && (
             <label htmlFor="name" className="mb-3 block text-xs font-semibold text-[var(--muted)]">
-              Full name
+              <span className="inline-flex items-center gap-1.5">
+                <Icon name="user-round" size={14} />
+                Full name
+              </span>
               <input
                 id="name"
                 name="name"
