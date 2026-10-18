@@ -83,6 +83,8 @@ password confirmation and role. Sign-in and both auth APIs validate input on the
 |---|---|---|
 | POST `/api/auth/register` | authorized staff | Validate and create a doctor or lab account |
 | POST `/api/auth/login` | everyone | Check login, return token and role |
+| GET `/api/patients` | DOCTOR | List patient-module records available for lab requests |
+| POST `/api/doctor/requests` | DOCTOR | Send a patient test request to the lab |
 | GET `/api/lab/dashboard` | LAB | Counts and weekly numbers |
 | GET `/api/lab/requests` | LAB | Pending test requests |
 | POST `/api/lab/requests/:id/report` | LAB | Upload report file, encrypt, mark completed |
