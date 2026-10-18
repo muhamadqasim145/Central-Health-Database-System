@@ -249,7 +249,10 @@ export default function Home() {
           </label>
 
           <div className="mb-3 text-xs font-semibold text-[var(--muted)]">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="inline-flex items-center gap-1.5">
+              <Icon name="lock" size={14} />
+              Password
+            </label>
             <div className="relative mt-1">
               <input
                 id="password"
