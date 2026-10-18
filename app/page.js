@@ -285,7 +285,10 @@ export default function Home() {
 
           {mode === "signup" && (
             <div className="mb-3 text-xs font-semibold text-[var(--muted)]">
-              <label htmlFor="confirmPassword">Confirm password</label>
+              <label htmlFor="confirmPassword" className="inline-flex items-center gap-1.5">
+                <Icon name="shield-check" size={14} />
+                Confirm password
+              </label>
               <div className="relative mt-1">
                 <input
                   id="confirmPassword"
