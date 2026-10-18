@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getRequests } from "@/services/labService";
+import Icon from "@/components/Icon";
 
 export default function RequestsPage() {
   const [list, setList] = useState(null);
@@ -16,7 +17,10 @@ export default function RequestsPage() {
 
   return (
     <>
-      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Test requests from doctors</p>
+      <p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">
+        <Icon name="clipboard-list" size={16} />
+        Test requests from doctors
+      </p>
       <div className="glass px-4 py-1">
         {list.length === 0 && <p className="py-4 text-[var(--muted)]">No pending requests</p>}
         {list.map((r, i) => (
