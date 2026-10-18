@@ -31,15 +31,19 @@ export default function RequestsPage() {
           >
             <div className="min-w-0 flex-1">
               <b>{r.testName}</b>
-              <span className="ml-2 rounded-full bg-[#fff0d6] px-2.5 py-0.5 text-[11px] font-bold text-[#9a5b00]">PENDING</span>
+              <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-[#fff0d6] px-2.5 py-0.5 text-[11px] font-bold text-[#9a5b00]">
+                <Icon name="clock" size={12} />
+                PENDING
+              </span>
               <div className="mt-1 text-[13px] text-[var(--muted)]">
                 {r.patientName} · Requested by {r.requestedBy} · {new Date(r.createdAt).toLocaleDateString()}
               </div>
             </div>
             <Link
               href={`/lab/upload?request=${r.id}`}
-              className="rounded-[10px] bg-[var(--accent)] px-3.5 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-[10px] bg-[var(--accent)] px-3.5 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5"
             >
+              <Icon name="file-up" size={16} />
               Upload report
             </Link>
           </div>
