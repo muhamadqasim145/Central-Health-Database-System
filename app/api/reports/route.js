@@ -28,7 +28,7 @@ export async function GET(req) {
     list.map((r) => ({
       id: r.id,
       testName: r.request.testName,
-      patientName: decryptText(r.patient.nameEncrypted),
+      patientName: formatPatientName(r.patient),
       fileName: r.fileName,
       fileType: r.fileType,
       createdAt: r.createdAt,
