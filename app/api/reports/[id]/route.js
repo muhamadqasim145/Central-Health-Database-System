@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { decryptBuffer, decryptText } from "@/lib/encryption";
 import { logAccess } from "@/lib/log";
+import { formatPatientName } from "@/lib/patientName";
 
 // GET /api/reports/:id?action=view   or   ?action=download
 // Checks the role, decrypts the file only now, writes an access log row.
@@ -26,11 +27,11 @@ export async function GET(req, { params }) {
   try {
     const file = decryptBuffer(Buffer.from(report.fileEncrypted)); // decrypted only for this request
     const note = report.noteEncrypted ? decryptText(report.noteEncrypted) : "";
-    const patientName = decryptText(report.patient.nameEncrypted);
+    const patientName = formatPatientName(report.patient);
     const action =
       new URL(req.url).searchParams.get("action") === "download" ? "Downloaded" : "Viewed (decrypted)";
 
-    await logAccess(user.name, `${report.request.testName} - ${patientName}`, action);
+    await logAccess(user.name, `${report.request.testName} - ${patientName}`, action, user.id);
 
     return Response.json({
       id: report.id,
