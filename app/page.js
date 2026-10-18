@@ -332,19 +332,22 @@ export default function Home() {
           <button
             type="submit"
             disabled={busy}
-            className="w-full rounded-2xl bg-[var(--accent)] py-3.5 text-base font-bold text-white shadow-lg transition hover:-translate-y-0.5 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-80"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--accent)] py-3.5 text-base font-bold text-white shadow-lg transition hover:-translate-y-0.5 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-80"
           >
-            {busy ? <><i className="spinner" /> {mode === "signup" ? "Creating your account" : "Checking with server"}</> :
-              mode === "signup" ? "Create staff account" : "Sign in"}
+            {busy ? (
+              <>
+                <i className="spinner" />
+                {mode === "signup" ? "Creating your account" : "Checking with server"}
+              </>
+            ) : (
+              <>
+                <Icon name={mode === "signup" ? "user-round" : "lock"} size={17} />
+                {mode === "signup" ? "Create staff account" : "Sign in"}
+              </>
+            )}
           </button>
         </form>
 
-        <p className="mt-4 text-center text-xs text-[var(--muted)]">
-          Want to preview the interface?{" "}
-          <Link href="/AlShifa_Hospital_Interface.html" className="font-semibold text-[var(--accent)] underline">
-            Open demo
-          </Link>
-        </p>
       </section>
     </main>
   );
