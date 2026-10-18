@@ -10,9 +10,16 @@
 }
 /* lab users get the teal theme (set from PortalShell / login page) */
 body[data-role="LAB"] {
-  --accent: #0b8f7f;
-  --accent2: #5fd6c3;
-  --bg: #e9faf6;
+  --accent: #08796f;
+  --accent2: #58c7a9;
+  --bg: #f1f7f5;
+  --ink: #18312e;
+  --muted: #617772;
+  --line: #dbe8e3;
+  --lab-soft: #eaf5f1;
+  --lab-blue: #eaf1ff;
+  --lab-violet: #f1edff;
+  --lab-amber: #fff4df;
 }
 body {
   background: var(--bg);
@@ -64,6 +71,38 @@ body {
 
 .grow { transform-origin: bottom; animation: grow 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) backwards; }
 @keyframes grow { from { transform: scaleY(0); } }
+
+.lab-hero {
+  background:
+    radial-gradient(ellipse at 80% 15%, rgba(67, 188, 150, 0.34), transparent 35%),
+    linear-gradient(125deg, #103e3a 0%, #0c5f58 58%, #08796f 100%);
+}
+.lab-hero-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(90deg, transparent, black);
+}
+.lab-hero-orbit { animation: lab-orbit 18s ease-in-out infinite alternate; }
+.lab-hero-orbit-inner { animation-duration: 13s; animation-direction: alternate-reverse; }
+@keyframes lab-orbit { to { translate: 0 -12px; } }
+.lab-metric { border-color: rgba(255, 255, 255, 0.9); }
+.lab-metric-icon { background: var(--lab-soft); }
+.lab-chart-bar { background: #d5e8e1; transform-origin: bottom; }
+.lab-chart-bar-active {
+  background: linear-gradient(180deg, var(--accent2), var(--accent));
+  animation: lab-bar-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes lab-bar-rise { from { transform: scaleY(0.08); opacity: 0.4; } to { transform: scaleY(1); opacity: 1; } }
+.lab-workspace-icon { background: var(--lab-soft); color: var(--accent); }
+.lab-workspace-blue { background: var(--lab-blue); color: #4265b7; }
+.lab-workspace-violet { background: var(--lab-violet); color: #7058b6; }
+.lab-workspace-amber { background: var(--lab-amber); color: #a36d14; }
+.lab-skeleton {
+  background: linear-gradient(100deg, rgba(255,255,255,.5) 30%, rgba(255,255,255,.9) 50%, rgba(255,255,255,.5) 70%);
+  background-size: 200% 100%;
+  animation: lab-skeleton-shimmer 1.5s ease-in-out infinite;
+}
+@keyframes lab-skeleton-shimmer { to { background-position-x: -200%; } }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
