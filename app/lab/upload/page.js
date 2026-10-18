@@ -121,7 +121,10 @@ export default function UploadPage() {
       </label>
 
       <div className="mb-3 rounded-xl bg-[#0f1f33] px-3 py-2.5 text-xs text-[#9ff0d4]">
-        <b className="mb-1 block text-[11px] uppercase tracking-wider text-white/85">Encryption</b>
+        <b className="mb-1 flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-white/85">
+          <Icon name="shield-check" size={14} />
+          Encryption
+        </b>
         <code className="break-all font-mono">{enc}</code>
       </div>
       <div className="mb-3 h-2 overflow-hidden rounded-md bg-[#e3e8ee]">
@@ -132,14 +135,17 @@ export default function UploadPage() {
       <button
         onClick={submit}
         disabled={busy}
-        className="w-full rounded-2xl bg-[var(--accent)] py-3.5 text-base font-bold text-white shadow-lg transition hover:-translate-y-0.5 disabled:opacity-70"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--accent)] py-3.5 text-base font-bold text-white shadow-lg transition hover:-translate-y-0.5 disabled:opacity-70"
       >
         {busy ? (
           <>
             <i className="spinner" /> Encrypting and uploading
           </>
         ) : (
-          "Encrypt and upload"
+          <>
+            <Icon name="upload" size={18} />
+            Encrypt and upload
+          </>
         )}
       </button>
     </div>
