@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { getReports, openReport } from "@/services/reportService";
 import { scramble } from "@/lib/scramble";
+import Icon from "@/components/Icon";
 
 // Used by the lab "Reports" page and by the patient page.
 // A report stays locked (encrypted text) until the user clicks View.
