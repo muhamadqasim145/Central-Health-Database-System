@@ -22,5 +22,5 @@ export async function register(name, role, username, password, confirmPassword) 
  * Returns: { token, role, name }   role is "LAB", "DOCTOR" or "PATIENT"
  */
 export async function login(username, password) {
-  return loginDemoAccount(username, password);
+  return (await api.post("/auth/login", { username, password })).data;
 }
