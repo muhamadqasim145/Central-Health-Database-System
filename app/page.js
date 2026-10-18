@@ -276,7 +276,8 @@ export default function Home() {
                 aria-pressed={showPassword}
                 className="absolute right-3 top-1/2 -translate-y-1/2 rounded px-1 py-1 text-xs font-semibold text-[var(--accent)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
               >
-                {showPassword ? "Hide" : "Show"}
+                <Icon name={showPassword ? "eye-off" : "eye"} size={15} />
+                <span>{showPassword ? "Hide" : "Show"}</span>
               </button>
             </div>
             {fieldErrors.password && <span id="password-error" className="mt-1 block text-red-700">{fieldErrors.password}</span>}
