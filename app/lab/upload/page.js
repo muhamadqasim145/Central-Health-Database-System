@@ -92,7 +92,10 @@ export default function UploadPage() {
       </label>
 
       <label className="mb-1 block text-xs font-semibold text-[var(--muted)]">
-        Lab report (photo or PDF)
+        <span className="inline-flex items-center gap-1.5">
+          <Icon name="file-text" size={14} />
+          Lab report (photo or PDF)
+        </span>
         <input type="file" accept="image/*,.pdf" onChange={pick} className={input} />
       </label>
       <p className="mb-2 text-[13px] text-[var(--muted)]">
@@ -105,7 +108,10 @@ export default function UploadPage() {
       {file && !preview && <p className="mb-3 text-[13px] text-[var(--muted)]">Selected file: {file.name}</p>}
 
       <label className="mb-3 block text-xs font-semibold text-[var(--muted)]">
-        Result summary (optional)
+        <span className="inline-flex items-center gap-1.5">
+          <Icon name="file-text" size={14} />
+          Result summary (optional)
+        </span>
         <textarea
           value={note}
           onChange={(e) => setNote(e.target.value)}
