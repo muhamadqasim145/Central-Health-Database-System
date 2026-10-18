@@ -1,5 +1,3 @@
-// Reference only: the models the API code expects. Your own schema may differ,
-// but these names and fields are used in the API files.
 generator client {
   provider = "prisma-client-js"
 }
