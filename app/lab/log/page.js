@@ -26,10 +26,12 @@ export default function AccessLogPage() {
             className="fade-up flex flex-wrap justify-between gap-2 border-b border-[var(--line)] py-3.5 last:border-0"
             style={{ animationDelay: `${Math.min(i, 10) * 0.05}s` }}
           >
-            <span>
+            <span className="inline-flex items-center gap-2">
+              <Icon name="user-round" size={15} className="text-[var(--accent)]" />
               {l.userName} · {l.reportTitle}
             </span>
-            <span className="text-[13px] text-[var(--muted)]">
+            <span className="inline-flex items-center gap-1.5 text-[13px] text-[var(--muted)]">
+              <Icon name="clock" size={14} />
               {l.action} · {new Date(l.createdAt).toLocaleString()}
             </span>
           </div>
