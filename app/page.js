@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { login, register } from "@/services/authService";
 import { saveSession } from "@/lib/session";
 import { hasValidationErrors, validateLogin, validateRegistration } from "@/lib/authValidation";
+import Icon from "@/components/Icon";
 
 const HOME = { LAB: "/lab", DOCTOR: "/doctor", PATIENT: "/patient" };
 const EMPTY_FORM = { name: "", role: "DOCTOR", username: "", password: "", confirmPassword: "" };
@@ -136,7 +136,10 @@ export default function Home() {
             d="M0 24H70L82 24L92 6L104 40L114 14L122 24H300"
           />
         </svg>
-        <h1 className="mt-1 text-[26px] font-semibold tracking-tight">Al Shifa Hospital</h1>
+        <h1 className="mt-1 flex items-center gap-2 text-[26px] font-semibold tracking-tight">
+          <Icon name="hospital" size={26} className="text-[var(--accent)]" />
+          Al Shifa Hospital
+        </h1>
         <p className="mb-4 text-sm text-[var(--muted)]">
           {mode === "signup"
             ? "Create your doctor or laboratory staff account."
