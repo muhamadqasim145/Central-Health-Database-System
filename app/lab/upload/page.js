@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { getRequests, uploadReport } from "@/services/labService";
 import { scramble } from "@/lib/scramble";
 import { getSession } from "@/lib/session";
+import Icon from "@/components/Icon";
 
 export default function UploadPage() {
   const router = useRouter();
@@ -72,8 +73,15 @@ export default function UploadPage() {
 
   return (
     <div className="glass fade-up p-5">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-[var(--ink)]">
+        <Icon name="file-up" size={21} className="text-[var(--accent)]" />
+        Upload lab report
+      </h3>
       <label className="mb-3 block text-xs font-semibold text-[var(--muted)]">
-        Test request
+        <span className="inline-flex items-center gap-1.5">
+          <Icon name="clipboard-list" size={14} />
+          Test request
+        </span>
         <select value={reqId} onChange={(e) => setReqId(e.target.value)} className={input}>
           {requests.map((r) => (
             <option key={r.id} value={r.id}>
