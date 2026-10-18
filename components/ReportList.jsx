@@ -66,8 +66,12 @@ export default function ReportList() {
             style={{ animationDelay: `${i * 0.08}s` }}
           >
             <div className="min-w-0 flex-1">
-              <b>{r.testName}</b>
-              <div className="my-1 text-[13px] text-[var(--muted)]">
+              <b className="inline-flex items-center gap-1.5">
+                <Icon name="file-text" size={15} className="text-[var(--accent)]" />
+                {r.testName}
+              </b>
+              <div className="my-1 inline-flex items-center gap-1.5 text-[13px] text-[var(--muted)]">
+                <Icon name="clock" size={13} />
                 {r.patientName} · {new Date(r.createdAt).toLocaleDateString()} · {r.fileName}
               </div>
               {(openId !== r.id || loading) && (
