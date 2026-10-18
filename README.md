@@ -21,17 +21,31 @@ If your project uses Tailwind v3, replace that line with the three `@tailwind` l
 
 Copy `.env.example` to `.env` and fill the three values (never upload `.env` to GitHub).
 
-## 3. Database (you create this part)
+## 3. PostgreSQL database
 
-`prisma/schema.prisma` shows the models the API expects. After your database exists:
+The app uses PostgreSQL through Prisma. Put `DATABASE_URL`, `ENCRYPTION_KEY`, and
+`JWT_SECRET` in the ignored local `.env` file. The schema maps to the existing patient
+module's `Patients` table; it does not create a duplicate patient table. The baseline
+migration preserves the existing database, and the next migration adds only the lab
+account, test request, report, and audit tables. For an existing deployment, inspect
+the migration SQL and back up the database before applying migrations.
 
-```bash
-npx prisma migrate dev --name init
-```
+The lab module uses these tables from `prisma/schema.prisma`:
 
-Create test users with your own seed script. Passwords use `bcryptjs.hash(password, 10)` and
-patient names use `encryptText(name)` from `lib/encryption.js`. Roles are `LAB`, `DOCTOR`, `PATIENT`.
-A patient user needs `patientId` set to the matching Patient row.
+| Table | Purpose / owner |
+|---|---|
+| `Patients` | Existing patient-module table; lab requests, reports, and patient accounts reference its `patientID`. |
+| `User` | Portal login accounts; patient accounts link to `Patients`, and lab report uploads link to the staff account. |
+| `LabTestRequest` | Lab work queue, linked to `Patients` and optionally an existing `MedicalRecords` row. |
+| `LabReport` | Encrypted report file and note, linked to its request, patient, and uploading account. |
+| `AccessLog` | Records report views, downloads, and uploads for the lab audit page. |
+
+The doctor workflow selects patients from the patient module and creates lab requests;
+it does not create duplicate patient records. Lab staff upload reports for those requests.
+The patient portal reads only reports associated with the `Patients` row linked to that
+account. Patient accounts must be provisioned by a trusted administrator/seed process
+and linked to the correct patient record; public sign-up cannot claim a patient's identity.
+Passwords use `bcryptjs.hash(password, 10)`.
 
 ## 4. Run
 
@@ -42,28 +56,14 @@ npm run dev      # http://localhost:3000
 ## Sign up and sign in
 
 The home page opens on staff sign-up. Staff can select Doctor or Laboratory staff; registration
-accepts only those two roles. Demo accounts are stored in this browser's local storage with salted,
-PBKDF2-hashed passwords. After registration, users are returned to the sign-in form and must sign
-in before opening the portal for their selected role.
-This browser-only authentication is for fictional test data and is not suitable for real accounts
-or patient information. Demo account data is separate per browser and can be removed by clearing
-the site's local storage.
+accepts only those two roles and saves accounts in the configured PostgreSQL database. After
+registration, users are returned to the sign-in form and must sign in before opening the portal
+for their selected role. Sign-in validates credentials against the same database, and the returned
+token is used for database-backed API requests.
 
 Sign-up validates full names (2–80 characters), usernames (3–30 letters, numbers, periods,
 underscores, or hyphens), passwords (at least 8 characters and at most 72 UTF-8 bytes), and matching
 password confirmation and role. Sign-in and both auth APIs validate input on the server as well.
-
-## Interface demo
-
-The sign-in page links to the existing interface demo, which uses fictional sample data without
-requiring a database.
-Demo uploads and report activity are stored in this browser only; they are not sent to the API.
-Do not enter real patient information in demo mode.
-
-The auth APIs remain available for database-backed authentication. To use them, configure
-`.env.local` with a valid `DATABASE_URL`, make sure PostgreSQL is running, and run
-`npx prisma migrate dev --name init`. Restart the development server after changing environment
-variables.
 
 ## Folder map
 
