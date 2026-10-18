@@ -1,0 +1,2 @@
+-- Baseline marker for the existing patient-module PostgreSQL schema.
+-- The existing tables are intentionally left unchanged.
