@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { decryptText } from "@/lib/encryption";
+import { formatPatientName } from "@/lib/patientName";
 
 // GET /api/reports   (LAB, DOCTOR, PATIENT)
 // Lab and doctor get all reports. A patient gets only their own.
@@ -19,7 +19,7 @@ export async function GET(req) {
       fileType: true,
       createdAt: true,
       request: { select: { testName: true } },
-      patient: { select: { nameEncrypted: true } },
+      patient: { select: { firstName: true, lastName: true } },
     },
     orderBy: { createdAt: "desc" },
   });
