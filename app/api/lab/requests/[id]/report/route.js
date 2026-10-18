@@ -1,7 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { encryptBuffer, encryptText, decryptText } from "@/lib/encryption";
+import { encryptBuffer, encryptText } from "@/lib/encryption";
 import { logAccess } from "@/lib/log";
+import { formatPatientName } from "@/lib/patientName";
 
 const ALLOWED = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
 const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
@@ -53,8 +54,9 @@ export async function POST(req, { params }) {
 
   await logAccess(
     user.name,
-    `${request.testName} - ${decryptText(request.patient.nameEncrypted)}`,
-    "Uploaded (encrypted)"
+    `${request.testName} - ${formatPatientName(request.patient)}`,
+    "Uploaded (encrypted)",
+    user.id
   );
 
   return Response.json({ ok: true });
