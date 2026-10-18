@@ -311,7 +311,8 @@ export default function Home() {
                   aria-pressed={showConfirmPassword}
                   className="absolute right-3 top-1/2 -translate-y-1/2 rounded px-1 py-1 text-xs font-semibold text-[var(--accent)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                 >
-                  {showConfirmPassword ? "Hide" : "Show"}
+                  <Icon name={showConfirmPassword ? "eye-off" : "eye"} size={15} />
+                  <span>{showConfirmPassword ? "Hide" : "Show"}</span>
                 </button>
               </div>
               {fieldErrors.confirmPassword && (
